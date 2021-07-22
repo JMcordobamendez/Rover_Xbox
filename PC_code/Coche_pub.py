@@ -27,7 +27,7 @@ def on_connect(client, userdata, flags, rc):
 def on_publish(client,userdata,result):             #create function for callback
     print(Nd,Ni,B)
     pass
-Host_raspberry = '192.168.43.84' #Puede ser otro, cambiar de forma manual
+Host_raspberry = socket.gethostbyname('chemipi.local') #Puede ser otro, cambiar de forma manual
 #Inicializo el publicador de MQTT
 client = mqtt.Client(client_id='Josemi_pub', clean_session=False)
 client.on_connect = on_connect
