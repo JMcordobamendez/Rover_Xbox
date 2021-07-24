@@ -120,10 +120,15 @@ class Control():
     def ref(self, ref_N_d, ref_N_i):
         #Primero Conocer la Velocidad de los Motores
         self.leer()
-        #Si el griro es negativo invertir el valor de la velocidad
+        #Si el giro es negativo invertir el valor de la velocidad (el encoder óptico no detecta la dirección de giro)
         if ref_N_d < 0 and self.N_d > 0:
             self.N_d = - self.N_d
         if ref_N_i < 0 and self.N_i > 0:
+            self.N_i = - self.N_i
+        #Si el giro es positivo y la velocidad negativa, invertir el valor de la velocidad
+        if ref_N_d > 0 and self.N_d < 0:
+            self.N_d = - self.N_d
+        if ref_N_i > 0 and self.N_i < 0:
             self.N_i = - self.N_i
         #Comprobar que el controlador ha superado el tiempo de muestro
         if (self.tf - self.t_c) >= self.T:
